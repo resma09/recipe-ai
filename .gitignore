@@ -1,7 +1,7 @@
 # Dependencies
 node_modules/
 server/node_modules/
-generate-recipe/node_modules/
+client/node_modules/
 
 # Environment variables
 .env
@@ -48,3 +48,7 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
+
+.DS_Store
+server/.DS_Store
+client/.DS_Store   
