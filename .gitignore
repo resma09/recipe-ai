@@ -8,6 +8,8 @@ generate-recipe/node_modules/
 .env.local
 .env.production
 .env.development
+server/.env
+genreate-recipe/.env
 
 # Build outputs
 dist/
