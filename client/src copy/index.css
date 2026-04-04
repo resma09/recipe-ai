@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+
+
+#root {
+  min-height: 100vh;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at top left, #1e1b2e, #0a0a0f);
+  min-height: 100vh;
+  background: #f9fafb;
+  color: #111827;
+}
+
+/* Glass card utility */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f1f2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6b21a5;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9333ea;
+}
+
+/* Light mode cards – override the dark glass style */
+.light-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+}
+
+body {
+  transition: background-color 0.3s;
+}
+
+body.dark {
+  background: radial-gradient(circle at top left, #1e1b2e, #0a0a0f);
+  color: #e5e7eb;
+}
+
+body:not(.dark) {
+  background: #f8fafc;
+  color: #0f172a;
+}

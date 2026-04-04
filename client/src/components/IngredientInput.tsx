@@ -29,9 +29,7 @@ export default function IngredientInput({ onGenerate, disabled }: IngredientInpu
   };
 
   const handleGenerate = () => {
-    if (ingredients.length > 0) {
-      onGenerate(ingredients);
-    }
+    if (ingredients.length > 0) onGenerate(ingredients);
   };
 
   const clearAll = () => {
@@ -39,102 +37,108 @@ export default function IngredientInput({ onGenerate, disabled }: IngredientInpu
     setInputValue("");
   };
 
-  // Quick-add suggestions
   const suggestions = ["chicken", "garlic", "onion", "tomato", "rice", "ginger", "potato", "egg", "butter", "lemon"];
   const availableSuggestions = suggestions.filter((s) => !ingredients.includes(s));
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg flex flex-col transition-colors">
-      <h2 className="text-xl font-semibold mb-4 text-center text-gray-900 dark:text-white">
-        What's in your kitchen?
-      </h2>
+    <div className="bg-white dark:bg-[#181917] border border-gray-200 dark:border-white/[0.07] rounded-2xl p-6 flex flex-col gap-5 transition-colors">
 
-      {/* INPUT */}
-      <div className="flex gap-2 mb-4">
+      {/* Heading */}
+      <div>
+        <h2 className="font-['Instrument_Serif'] text-[22px] text-gray-900 dark:text-[#f0efe8] font-normal leading-snug">
+          What's in your <span className="text-[#4a5c2f] dark:text-[#8aab5c] italic">kitchen?</span>
+        </h2>
+        <p className="text-[13px] text-gray-500 dark:text-[#555] mt-1">
+          Add ingredients and Gemini AI will craft a recipe for you.
+        </p>
+      </div>
+
+      {/* Input row */}
+      <div className="flex gap-2">
         <input
           type="text"
           value={inputValue}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type an ingredient and press Enter..."
-          className="flex-1 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition"
+          placeholder="Type an ingredient..."
+          className="flex-1 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-[#f0efe8] text-[13.5px] placeholder:text-gray-400 dark:placeholder:text-[#3a3a35] px-4 py-2.5 rounded-[10px] outline-none focus:border-[#4a5c2f] dark:focus:border-[#8aab5c]/50 transition-colors"
         />
         <button
           onClick={addIngredient}
           disabled={!inputValue.trim()}
-          className="px-4 py-3 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="bg-[#4a5c2f] dark:bg-[#8aab5c] text-white dark:text-[#111210] text-[13px] font-medium px-4 py-2.5 rounded-[10px] hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
         >
           Add
         </button>
       </div>
 
-      {/* QUICK SUGGESTIONS */}
-      {availableSuggestions.length > 0 && ingredients.length < 3 && (
-        <div className="mb-4">
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Quick add:</p>
-          <div className="flex flex-wrap gap-2">
-            {availableSuggestions.slice(0, 6).map((s) => (
+      {/* Quick add */}
+      {availableSuggestions.length > 0 && (
+        <div>
+          <p className="text-[11.5px] text-gray-400 dark:text-[#444] mb-2">Quick add</p>
+          <div className="flex flex-wrap gap-1.5">
+            {availableSuggestions.slice(0, 7).map((s) => (
               <button
                 key={s}
                 onClick={() => setIngredients([...ingredients, s])}
-                className="px-3 py-1 text-xs rounded-full border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                className="border border-gray-200 dark:border-white/10 text-gray-500 dark:text-[#555] text-[12px] px-3 py-1 rounded-full hover:border-[#4a5c2f] dark:hover:border-[#8aab5c]/40 hover:text-[#4a5c2f] dark:hover:text-[#8aab5c] transition-all"
               >
-                + {s}
+                {s}
               </button>
             ))}
           </div>
         </div>
       )}
 
-      {/* INGREDIENT TAGS */}
-      <div className="flex-1 min-h-[200px] border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-4 bg-gray-50 dark:bg-gray-700 flex flex-wrap gap-2 content-start">
-        {ingredients.length === 0 ? (
-          <div className="w-full h-full flex items-center justify-center">
-            <p className="text-gray-400 dark:text-gray-500 text-sm text-center">
-              Add ingredients above to get recipe suggestions
-            </p>
-          </div>
-        ) : (
-          ingredients.map((ingredient) => (
-            <span
-              key={ingredient}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200 rounded-full text-sm group"
-            >
-              {ingredient}
-              <button
-                onClick={() => removeIngredient(ingredient)}
-                className="text-indigo-400 hover:text-indigo-700 dark:hover:text-white text-xs ml-0.5 cursor-pointer"
+      {/* Ingredient box */}
+      <div>
+        <p className="text-[10.5px] uppercase tracking-widest text-gray-400 dark:text-[#3a3a35] font-medium mb-2">
+          Your ingredients
+        </p>
+        <div className="bg-gray-50 dark:bg-white/[0.03] border border-gray-200 dark:border-white/[0.07] rounded-[10px] p-3.5 min-h-[110px] flex flex-wrap gap-2 content-start transition-colors">
+          {ingredients.length === 0 ? (
+            <div className="w-full h-full flex items-center justify-center py-5">
+              <p className="text-gray-400 dark:text-[#3a3a35] text-[13px] text-center">Nothing added yet</p>
+            </div>
+          ) : (
+            ingredients.map((ingredient) => (
+              <span
+                key={ingredient}
+                className="inline-flex items-center gap-1.5 bg-[#4a5c2f]/10 dark:bg-[#8aab5c]/[0.12] border border-[#4a5c2f]/20 dark:border-[#8aab5c]/[0.22] text-[#4a5c2f] dark:text-[#a8c87a] text-[12.5px] px-3 py-1 rounded-full"
               >
-                ✕
-              </button>
-            </span>
-          ))
-        )}
+                {ingredient}
+                <button
+                  onClick={() => removeIngredient(ingredient)}
+                  className="text-[#4a5c2f]/60 dark:text-[#6a8a42] hover:text-[#4a5c2f] dark:hover:text-[#f0efe8] text-[15px] leading-none transition-colors cursor-pointer"
+                >
+                  ×
+                </button>
+              </span>
+            ))
+          )}
+        </div>
       </div>
 
-      {/* INGREDIENT COUNT */}
-      {ingredients.length > 0 && (
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
-          {ingredients.length} ingredient{ingredients.length > 1 ? "s" : ""} added
-        </p>
-      )}
-
-      {/* BUTTONS */}
-      <div className="mt-6 flex flex-col sm:flex-row gap-4">
+      {/* Actions */}
+      <div className="flex gap-2 pt-1">
         <button
           onClick={clearAll}
-          className="w-full bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 font-semibold py-3 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors"
+          className="flex-1 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/[0.08] text-gray-500 dark:text-[#555] text-[13px] py-2.5 rounded-[10px] hover:text-gray-700 dark:hover:text-[#888] transition-all"
         >
-          Clear All
+          Clear all
         </button>
         <button
           disabled={disabled || ingredients.length === 0}
           onClick={handleGenerate}
-          className="w-full bg-indigo-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="flex-[2] bg-[#4a5c2f] dark:bg-[#8aab5c] text-white dark:text-[#111210] text-[13px] font-medium py-2.5 px-4 rounded-[10px] hover:opacity-90 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
         >
-          {disabled ? "Generating..." : `Get Recipe (${ingredients.length} ingredients)`}
+          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+          {disabled ? "Generating..." : `Generate recipe (${ingredients.length})`}
         </button>
       </div>
+
     </div>
   );
 }

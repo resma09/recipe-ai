@@ -1,13 +1,7 @@
 import { Component, type ReactNode, type ErrorInfo } from "react";
 
-type Props = {
-  children: ReactNode;
-};
-
-type State = {
-  hasError: boolean;
-  error: Error | null;
-};
+type Props = { children: ReactNode };
+type State = { hasError: boolean; error: Error | null };
 
 export default class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
@@ -26,23 +20,23 @@ export default class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 max-w-md w-full">
-            <div className="text-center">
-              <div className="text-6xl mb-4">⚠️</div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                Oops! Something went wrong
-              </h1>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                {this.state.error?.message || "An unexpected error occurred"}
-              </p>
-              <button
-                onClick={() => window.location.reload()}
-                className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
-              >
-                Reload Page
-              </button>
+        <div className="min-h-screen flex items-center justify-center bg-[#111210] p-4">
+          <div className="bg-[#181917] border border-white/[0.07] rounded-2xl p-10 max-w-sm w-full text-center flex flex-col items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center text-xl">
+              ⚠️
             </div>
+            <h1 className="font-['Instrument_Serif'] text-[22px] text-[#f0efe8]">
+              Something went wrong
+            </h1>
+            <p className="text-[13px] text-[#555] leading-relaxed">
+              {this.state.error?.message || "An unexpected error occurred"}
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="bg-[#8aab5c] text-[#111210] text-[13px] font-medium px-6 py-2.5 rounded-[10px] hover:bg-[#9dbe6e] transition-colors"
+            >
+              Reload page
+            </button>
           </div>
         </div>
       );

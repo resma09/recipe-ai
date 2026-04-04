@@ -10,10 +10,10 @@ const GalleryPage = lazy(() => import("./pages/GalleryPage"));
 export default function App() {
   return (
     <ErrorBoundary>
-      <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-[#111210] transition-colors">
+      <div className="min-h-screen bg-gray-50 dark:bg-transparent">
         <Header />
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
-          <Suspense fallback={<Spinner label="Loading..." />}>
+        <main className="flex-1 container mx-auto p-4 lg:p-8">
+          <Suspense fallback={<Spinner label="Loading page..." />}>
             <Routes>
               <Route path="/" element={<GeneratorPage />} />
               <Route path="/gallery" element={<GalleryPage />} />
