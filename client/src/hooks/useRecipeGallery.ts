@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import { useEffect, useState, useCallback } from "react";
 import type { Recipe } from "../types";
 
